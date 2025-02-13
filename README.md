@@ -11,7 +11,7 @@ The dataset contains two data files: (1) disaster messages and (2) disaster cate
 
 ### Project Files:
 #### process_data.py:
-The ETL script takes the file paths of the two datasets, cleanse the datasets and stores it into a SQLite database in the specified database file path.
+The ETL script takes the file paths of the two datasets, cleans the datasets and stores it into a SQLite database in the specified database file path.
 
 #### train_classifier.py: 
 The machine learning script loads the data from the SQLite database, builds a text processing machine learning pipeline to classify the messages into 36 categories and exports the final model as a pickle file. 
