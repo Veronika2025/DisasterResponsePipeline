@@ -26,7 +26,7 @@ from sklearn.ensemble import GradientBoostingClassifier
 
 
 def load_data(database_filepath):
-     """
+    """
     Load and preprocess data from a SQLite database.
 
     Args:
@@ -39,7 +39,6 @@ def load_data(database_filepath):
         
     """
   
-   
     #Get the base name of the file (last part of the path)
     base_name = os.path.basename(database_filepath)
     # Split the base name to remove the file extension
@@ -51,13 +50,11 @@ def load_data(database_filepath):
     df = df.dropna()
     #load to database
     df.to_sql('table_name', engine, if_exists='replace', index=False)
-   #define features and label arrays
+    #define features and label arrays
     X = df['message']
     y = df[df.columns[4:]]
     category = y.columns
     return X, y, category
-
-
 
 def tokenize(text):
     """
@@ -90,8 +87,7 @@ def build_model():
         hyperparameter tuning.
     """
     
-    # model pipeline
- 
+    #model pipeline
     pipeline = Pipeline([
        ('vect', CountVectorizer()),
        ('tfidf', TfidfTransformer()),
@@ -115,7 +111,7 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
-     """Report the f1 score, precision and recall for each output category of the dataset
+    """Report the f1 score, precision and recall for each output category of the dataset
    
     Args:
         model (Pipeline): A trained machine learning pipeline that includes preprocessing and model steps.
@@ -141,7 +137,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
-     """
+    """
     Save the trained model to a specified file path as a pickle file.
 
     Args:
@@ -152,7 +148,7 @@ def save_model(model, model_filepath):
         None: The function saves the model to the specified file path.
     """
     with open(model_filepath, 'wb') as file:
-         pickle.dump(model, file)
+        pickle.dump(model, file)
    
 
 
