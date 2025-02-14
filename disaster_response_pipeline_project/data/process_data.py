@@ -36,27 +36,27 @@ def clean_data(df):
       
     
     # create a dataframe of the 36 individual category columns
-     categories_df = df["categories"].str.split(";", expand = True)
-     row = categories_df.values[0]
+    categories_df = df["categories"].str.split(";", expand = True)
+    row = categories_df.values[0]
 
     # use this row to extract a list of new column names for categories.
-     category_colnames = list(map(lambda x: x.split('-')[0], row))
+    category_colnames = list(map(lambda x: x.split('-')[0], row))
     # rename the columns of `categories`
-     categories_df.columns = category_colnames
+    categories_df.columns = category_colnames
     
-     for column in categories_df:
+    for column in categories_df:
     # set each value to be the last character of the string
-         categories_df[column] = categories_df[column].astype(str).str[-1]
+        categories_df[column] = categories_df[column].astype(str).str[-1]
     # convert column from string to numeric
-         categories_df[column] = categories_df[column].astype(int)
+        categories_df[column] = categories_df[column].astype(int)
     # drop the original categories column from `df`
-     df = df.drop("categories", axis=1)
+    df = df.drop("categories", axis=1)
     # concatenate the original dataframe with the new `categories` dataframe
-     df = pd.concat([df, categories_df],axis=1)
+    df = pd.concat([df, categories_df],axis=1)
     # drop duplicates
-     df = df.drop_duplicates()
+    df = df.drop_duplicates()
         
-     return df
+    return df
 
 
 def save_data(df, database_filename):
